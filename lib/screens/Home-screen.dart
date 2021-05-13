@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todoprovider/models/Task-model.dart';
 import 'package:todoprovider/provider/Todo-provider.dart';
 
 GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -120,10 +119,12 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                 child: Text('Save'),
-                                onPressed: () {
-                                  context.read<Todo>().addToTaskList(
+                                onPressed: () async {
+                                  await context.read<Todo>().addToTaskList(
                                       titleCtrl.text, contentCtrl.text);
                                   Navigator.of(context).pop();
+                                  titleCtrl.text = '';
+                                  contentCtrl.text = '';
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.cyan,
@@ -132,6 +133,8 @@ class HomeScreen extends StatelessWidget {
                               ElevatedButton(
                                 child: Text('Cancel'),
                                 onPressed: () {
+                                  titleCtrl.text = '';
+                                  contentCtrl.text = '';
                                   Navigator.of(context).pop();
                                 },
                                 style: ElevatedButton.styleFrom(
