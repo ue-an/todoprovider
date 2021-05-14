@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoprovider/provider/Todo-provider.dart';
@@ -5,6 +6,12 @@ import 'package:todoprovider/provider/Todo-provider.dart';
 GlobalKey<FormState> formKey = GlobalKey<FormState>();
 TextEditingController titleCtrl = TextEditingController();
 TextEditingController contentCtrl = TextEditingController();
+
+// addTask() {
+//   CollectionReference ref = FirebaseFirestore.instance.collection('tasknotes');
+//   ref.add({'title': titleCtrl.text, 'content': contentCtrl.text}).whenComplete(() => Navigator.pop(context));
+// }
+// CollectionReference ref = FirebaseFirestore.instance.collection('tasknotes');
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -119,7 +126,8 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                 child: Text('Save'),
-                                onPressed: () async {
+                                onPressed: //addTask(),
+                                    () async {
                                   await context.read<Todo>().addToTaskList(
                                       titleCtrl.text, contentCtrl.text);
                                   Navigator.of(context).pop();
